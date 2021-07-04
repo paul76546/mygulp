@@ -30,7 +30,11 @@ let { src, dest } = require('gulp'),
     browsersync = require("browser-sync").create(),
     fileinclude = require("gulp-file-include"),
     del = require("del"),
-    scss = require('gulp-sass')(require('sass'));
+    scss = require('gulp-sass')(require('sass')),
+    autoprefixer = require("gulp-autoprefixer"),
+    group_media = require('gulp-group-css-media-queries'),
+    clean_css = require('gulp-clean-css'),
+    rename = require("gulp-rename");
 
 function browserSync(params) {
     browsersync.init({
@@ -50,7 +54,8 @@ function html() {
 }
 
 function watchFiles(params) {
-    gulp.watch([path.watch.html], html);
+    gulp.watch([path.watch.html], html),
+    gulp.watch([path.watch.css], css);
 }
 
 function clean(params) {
@@ -62,6 +67,22 @@ function css() {
         .pipe(
             scss({
                 outputStyle: "expanded"
+            })
+        )
+        .pipe(
+            group_media()
+            )
+        .pipe(
+            autoprefixer({
+                overrideBrowserslist:["last 5 versions"],
+                cascade: true
+            })
+        )
+        .pipe(dest(path.build.css))
+        .pipe(clean_css())
+        .pipe(
+            rename({
+                extname: ".min.css"
             })
         )
         .pipe(dest(path.build.css))

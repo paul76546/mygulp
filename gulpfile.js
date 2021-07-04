@@ -34,7 +34,8 @@ let { src, dest } = require('gulp'),
     autoprefixer = require("gulp-autoprefixer"),
     group_media = require('gulp-group-css-media-queries'),
     clean_css = require('gulp-clean-css'),
-    rename = require("gulp-rename");
+    rename = require("gulp-rename"),
+    uglify = require('gulp-uglify-es').default;
 
 function browserSync(params) {
     browsersync.init({
@@ -55,7 +56,8 @@ function html() {
 
 function watchFiles(params) {
     gulp.watch([path.watch.html], html),
-    gulp.watch([path.watch.css], css);
+    gulp.watch([path.watch.css], css),
+    gulp.watch([path.watch.js], js);
 }
 
 function clean(params) {
@@ -89,9 +91,26 @@ function css() {
         .pipe(browsersync.stream())
 }
 
-let build = gulp.series(clean, gulp.parallel(css, html));
+function js() {
+    return src(path.src.js)
+        .pipe(fileinclude())
+        .pipe(dest(path.build.js))
+        .pipe(
+            uglify()
+            )
+        .pipe(
+            rename({
+                extname: ".min.js"
+            })
+        )
+        .pipe(dest(path.build.js))
+        .pipe(browsersync.stream())
+}
+
+let build = gulp.series(clean, gulp.parallel(js, css, html));
 let watch = gulp.parallel(build, watchFiles, browserSync);
 
+exports.js = js;
 exports.css = css;
 exports.html = html;
 exports.build = build;

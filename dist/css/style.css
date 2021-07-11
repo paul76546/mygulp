@@ -13,6 +13,10 @@ div {
   font-size: 30px;
 }
 
+div {
+  background: url("../img/image.jpg") 0 0 no-repeat;
+}
+
 @media (max-width: 767px) {
   span {
     font-size: 15px;
@@ -22,3 +26,5 @@ div {
     font-size: 20px;
   }
 }
+
+.webp div { background: url(../img/image.webp) 0 0 no-repeat; }

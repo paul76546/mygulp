@@ -1,2 +1,2 @@
-console.log('Hello My Gulp!');//подключение других файлов js, 
+console.log('Hello My Gulp!');//подключение других файлов js к главному файлу script.js 
 //можно закоментить если один js файл

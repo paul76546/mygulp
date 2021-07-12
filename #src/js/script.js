@@ -1,4 +1,4 @@
-@@include('main.js');
+@@include('main.js')
 
 function testWebP(callback) {
 

@@ -137,17 +137,18 @@ function js() {
 }
 
 gulp.task('svgSprite', function () {
-    return gulp.src([source_folder + '/iconsprite/*.svg'])
+    return gulp.src([source_folder + '/icons/*.svg'])
     .pipe(svgSprite({
         mode: {
             stack: {
-                sprite:"../icons/icons.svg",//sprite file name
-                example: true
+                sprite: "../img/icons/icons.svg", //sprite file name
+                example: true//запуск во втором терминале  gulp svgSprite
             }
         },
     }
     ))
     .pipe(dest(path.build.img))
+    
 })
 
 let build = gulp.series(clean, gulp.parallel(js, css, html, images));

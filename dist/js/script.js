@@ -1,4 +1,4 @@
-alert('Hello My gulp!');;
+console.log('Hello My Gulp!');
 
 function testWebP(callback) {
 

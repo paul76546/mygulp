@@ -1,5 +1,5 @@
 //let project_folder = require("path").basename(__dirname);//папка всего продакшн проекта
-let project_folder = "dist";//продакшн
+let project_folder = "dist";//продакшн, если надо с именем проекта, ставим первую строку а строку 2 закоментировать
 let source_folder = "#src";//исходники
 
 let fs = require('fs');

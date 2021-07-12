@@ -1,5 +1,6 @@
 console.log('Hello My Gulp!');//подключение других файлов js к главному файлу script.js 
 //можно закоментить если один js файл
+console.log('Вперед к новым достижениям!');
 
 function testWebP(callback) {
 
